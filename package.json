@@ -12,9 +12,7 @@
     "shrinkwrap": "npm-shrinkwrap --dev"
   },
   "pre-commit": [
-    "lint",
-    "shrinkwrap",
-    "start-prod"
+    "lint"
   ],
   "author": "Ziyad Parekh",
   "license": "ISC",
