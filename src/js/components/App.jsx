@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
+import { Panel, Input, ButtonInput } from 'react-bootstrap'
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <p>This is a public service announcement</p>
-        <p>Sponsored by Just Blaze and the good folks at Roc-A-Fella records</p>
-        <p>Fellow Americans, it is with the utmost pride and sicerety</p>
-        <p>That i present this recording, as living testament and recollection</p>
-        <p>Of history in the making during our generation</p>
-        <p>Allow me to reintroduce myself</p>
-        <p>My Name is HOV</p>
-        <p>H to the O V</p>
-      </div>
-    );
+      <Panel className="col-xs-8" style={{marginLeft:"auto", marginRight: "auto", float: "none"}}>
+        <form className="form-horizontal">
+          <Input type="text" label="Username" labelClassName="col-xs-2" wrapperClassName="col-xs-10" />
+          <Input type="password" label="Password" labelClassName="col-xs-2" wrapperClassName="col-xs-10" />
+          <Input type="checkbox" label="Remember Me" wrapperClassName="col-xs-offset-2 col-xs-10" help="Offset is applied to wrapper." />
+          <ButtonInput type="submit" value="Submit Button" className="pull-right" />
+        </form>
+      </Panel>
+    )
   }
 }
 
