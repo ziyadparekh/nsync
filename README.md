@@ -27,6 +27,16 @@ index.js #spins up a basic express server
 package.json #list of all dependecies and meta-data
 README.md #README.md
 ```
+### Features
+* React
+* Babel for es6 es7 javascript development
+* Express (Node.js server)
+* Webpack for bundling
+* Webpack Dev Server
+* Webpack Hot Module Middleware for awesome HMR (hot module replacement)
+* ESLint
+* Sass loader for styling
+* npm-shrinkwrap for dependency management
 
 ### Getting it working
 * Type `npm run start-server` and press enter. This starts an express server listening at `http://localhost:3030`. So you can copy that and paste it in your browser.
