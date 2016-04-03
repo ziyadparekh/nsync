@@ -84,14 +84,8 @@ gulp.task("build", function(cb) {
 gulp.task('webpack-dev-server', function () {
   const compiler = webpack(devConfig);
   const server = new WebpackDevServer(compiler, {
-    hot: true,
     contentBase: 'public',
-    stats: webpackLogOptions,
-    historyApiFallback: true,
-    publicPath: devConfig.output.publicPath,
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
+    stats: webpackLogOptions
   });
   server.listen(8901, "localhost", function (err) {
     if (err) {

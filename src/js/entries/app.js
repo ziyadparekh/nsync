@@ -1,10 +1,9 @@
+import CreateChannelContainer from 'containers/CreateChannelContainer';
+import CreateChannelConfig from 'configs/CreateChannelConfig';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import App from 'components/App';
-
-if (module.hot) {
-  module.hot.accept();
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <CreateChannelContainer config={CreateChannelConfig} />, 
+  document.getElementById('root')
+);

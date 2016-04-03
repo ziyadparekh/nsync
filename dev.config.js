@@ -17,9 +17,7 @@ let g = new glob.Glob('./src/js/entries/**/*.js', {
 
 g.found.forEach(function (file) {
   let outputFile = file.replace('./src/js/entries/', '').replace('.js', '');
-  let HMR = 'webpack-dev-server/client?http://' + host + ':' + port + '/';
-  entries[outputFile] = [ HMR, "webpack/hot/dev-server", path.resolve(__dirname, file) ];
-  //entries[outputFile] = path.resolve(__dirname, file)
+  entries[outputFile] = path.resolve(__dirname, file)
 });
 
 // Dont mutate baseConfig
@@ -30,7 +28,6 @@ devConfig.debug = true;
 devConfig.entry = entries;
 
 devConfig.plugins.push(
-  new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
     '__DEV__': true,
@@ -39,8 +36,6 @@ devConfig.plugins.push(
     }
   })
 );
-
-devConfig.output.publicPath = 'http://' + host + ':' + port + '/';
 
 module.exports = devConfig;
 
