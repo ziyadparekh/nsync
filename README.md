@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Frontend boilerplate
 
 ### Installation
@@ -45,3 +46,6 @@ README.md #README.md
 	* It takes every `.js` file located in `src/js/entries` and every `.scss` file inside `src/scss/entries`, compiles them and then dumps the minified versions inside of their respective compiled directories `public/compiled/js` and `public/compiled/css` (along with sourcemaps)
 	* It starts a development (webpack-dev-server)
 * To Be Continued...
+=======
+# nsync
+>>>>>>> 24226856d9c35c53ea2a7883f663611763bcc0f1
