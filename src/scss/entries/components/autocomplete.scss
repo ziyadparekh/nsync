@@ -24,7 +24,6 @@
   font-size: 16px;
   border-right-width: 0px;
   outline: 0;
-  text-transform: lowercase;
 }
 
 .search-button {
@@ -102,4 +101,31 @@
   text-align: center;
   font-size: 13px;
   color: $red400;
+}
+
+.left-button,
+.right-button {
+  width: 50%;
+  float: left;
+  position: relative;
+  color: $white;
+}
+.left-button {
+  background-color: $indigo400;
+}
+.right-button {
+  background-color: $cyan400;
+}
+
+.item-img {
+  position: relative;
+  float: left;
+  width: 20%;
+}
+
+.playlist-item {
+  position: relative;
+  width: 100%;
+  float: left;
+  margin-bottom: 10px;
 }

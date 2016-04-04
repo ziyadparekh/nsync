@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 const NOT_FOUND_MESSAGE = `Sorry, the linked video was not found. 
                           Please try another one`;
+const NO_DUPLICATE = `Sorry, you cannot add duplicate videos to the
+                      playlist`;
 
 class Autocomplete extends Component {
 
@@ -10,6 +12,8 @@ class Autocomplete extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.fetchVideoMeta = this.fetchVideoMeta.bind(this);
+    this.addNext = this.addNext.bind(this);
+    this.addAtEnd = this.addAtEnd.bind(this);
     
     this.oembedUrl = 'http://open.iframe.ly/api/iframely?';
     this.state = {
@@ -17,7 +21,9 @@ class Autocomplete extends Component {
       url: '',
       info: {},
       embedData: {},
-      status: {}
+      status: {},
+      playlist: [],
+      currentlyPlaying: 0
     }
   }
 
@@ -28,7 +34,7 @@ class Autocomplete extends Component {
 
     
     let qs = this.buildQueryString({
-      url: this.state.url,
+      url: encodeURIComponent(this.state.url),
       origin: 'ziyadparekh'
     });
     let url = `${this.oembedUrl}${qs}`;
@@ -83,7 +89,7 @@ class Autocomplete extends Component {
         type: null
       };
     }
-    url = url.trim().toLowerCase();
+    url = url.trim();
     url = url.replace("feature=player_embedded&", "");
 
     let m;
@@ -126,7 +132,7 @@ class Autocomplete extends Component {
   }
 
   handleInputChange(e) {
-    let url = e.target.value.toLowerCase();
+    let url = e.target.value;
     let info = this.parseMediaLinkUrl(url);
     this.setState({
       url,
@@ -249,6 +255,70 @@ class Autocomplete extends Component {
       return (<div></div>);
     }
   }
+  addAtEnd(e) {
+    let length = this.state.playlist.length;
+    this.addToPosition(length);
+  }
+  addNext(e) {
+    let currentlyPlaying = this.state.currentlyPlaying;
+    this.addToPosition(currentlyPlaying + 1);
+  }
+  isItemInArray(array, key, item) {
+    let truth = false;
+    array.map((obj) => {
+      if (obj[key] === item[key]) {
+        truth = true;
+      }
+    });
+    return truth;
+  }
+  addToPosition(pos) {
+    let playlist = this.state.playlist;
+    let item = this.formatEmbedData();
+
+    if (this.isItemInArray(playlist, 'id', item)) {
+      return this.setState({
+        'status': {
+          'type': 'info',
+          'message': NO_DUPLICATE
+        }
+      });
+    }
+
+    playlist.splice(pos, 0, item);
+    this.setState({
+      playlist: playlist
+    });
+  }
+  formatEmbedData() {
+    let data = this.state.embedData;
+    let info = this.state.info;
+    return {
+      id: info.id,
+      url: data.url,
+      src: data.links.thumbnail[0].href,
+      title: data.meta.title,
+      site: data.meta.site,
+      desc: data.meta.desc,
+      duration: data.meta.duration
+    };
+  }
+  renderButtonToolbar() {
+    return (
+      <div className='toolbar-container'>
+        <button
+          className='left-button'
+          onClick={this.addNext}>
+          Add Next
+        </button>
+        <button
+          className='right-button'
+          onClick={this.addAtEnd}>
+          Add To End
+        </button>
+      </div>
+    );
+  }
   renderEmbed() {
     if (Object.keys(this.state.embedData).length === 0) {
       return '';
@@ -264,6 +334,40 @@ class Autocomplete extends Component {
           webkitallowfullscreen="true" 
           mozallowfullscreen="true"
           />
+          <div className='full-width'>
+            {this.renderButtonToolbar()}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  renderEmptyPlaylist() {
+    return (
+      <div className='playlist panel'>
+        <div className='full-width'>
+          <span>Playlist is currently empty</span>
+        </div>
+      </div>
+    );
+  }
+  renderPlaylist() {
+    if (this.state.playlist.length === 0) {
+      return this.renderEmptyPlaylist();
+    }
+    const playlist = this.state.playlist;
+    return (
+      <div className='playlist panel'>
+        <div className='full-width'>
+        {playlist.map((item, idx) => {
+          return (
+            <div key={idx} id={item.id} className='playlist-item'>
+              <img src={item.src} className='item-img' />
+              <div className='info'>
+                <span className='title'>{item.title}</span>
+              </div>
+            </div>
+          );
+        })}
         </div>
       </div>
     );
@@ -277,6 +381,7 @@ class Autocomplete extends Component {
           {this.renderNote()}
         </div>
         {this.renderEmbed()}
+        {this.renderPlaylist()}
       </div>
     );
   }

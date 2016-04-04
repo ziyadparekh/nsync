@@ -25,7 +25,7 @@ class CreateChannelContainer extends Component {
 
   handleBackPress(e) {
     let currentPage = this.state.currentPage;
-    if (currentPage > 0) {
+    if (currentPage > 1) {
       this.setState({
         currentPage: currentPage - 1
       });
