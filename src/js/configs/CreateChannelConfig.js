@@ -1,5 +1,6 @@
 import SingleTextForm from 'components/SingleTextForm';
 import Autocomplete from 'components/Autocomplete';
+import Channel from 'components/Channel';
 
 const config = {
   formConfig: {
@@ -17,6 +18,12 @@ const config = {
       component: Autocomplete,
       props: {
         
+      }
+    },
+    3: {
+      component: Channel,
+      props: {
+
       }
     }
   },

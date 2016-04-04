@@ -329,10 +329,10 @@ class Autocomplete extends Component {
         <div className='full-width'>
           <iframe 
           src={embedSrc} 
-          frameborder="0" 
-          allowfullscreen="true" 
-          webkitallowfullscreen="true" 
-          mozallowfullscreen="true"
+          frameBorder="0" 
+          allowFullScreen="true" 
+          webkitAllowFullscreen="true" 
+          mozAllowFullscreen="true"
           />
           <div className='full-width'>
             {this.renderButtonToolbar()}

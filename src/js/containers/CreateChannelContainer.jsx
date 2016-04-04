@@ -4,7 +4,7 @@ import FormBuilder from 'components/FormBuilder';
 class CreateChannelContainer extends Component {
   constructor(props) {
     super(props);
-    this.config = props.config;
+    this.config = props.route.config;
     this.handleBackPress = this.handleBackPress.bind(this);
     this.handleNextPress = this.handleNextPress.bind(this);
 

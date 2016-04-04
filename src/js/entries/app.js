@@ -1,9 +1,14 @@
-import CreateChannelContainer from 'containers/CreateChannelContainer';
-import CreateChannelConfig from 'configs/CreateChannelConfig';
-import ReactDOM from 'react-dom';
 import React from 'react';
+import {render} from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import routes from 'routes/routes';
+import configureStore from 'store/store';
 
-ReactDOM.render(
-  <CreateChannelContainer config={CreateChannelConfig} />, 
-  document.getElementById('root')
+const store = configureStore();
+
+render(
+  <Provider store={store}>
+    <Router history={browserHistory} routes={routes} />
+  </Provider>, document.getElementById('root')
 );
