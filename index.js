@@ -13,13 +13,8 @@ app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', __dirname + '/views');
 
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  return next();
-});
-
 // Server plays nicely with the rest of your web routes
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
   res.status(200).render('Main', {});
 });
 

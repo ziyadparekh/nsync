@@ -35,14 +35,18 @@ class CreateChannelContainer extends Component {
   render() {
     let config = this.config;
     return (
-      <FormBuilder
-        formConfig={config.formConfig}
-        totalPages={config.totalPages}
-        currentPage={this.state.currentPage}
-        handleBack={this.handleBackPress}
-        handleNext={this.handleNextPress}
-        ref='CreateChannelForm'
-      />
+      <div>
+        <FormBuilder
+          formConfig={config.formConfig}
+          totalPages={config.totalPages}
+          currentPage={this.state.currentPage}
+          handleBack={this.handleBackPress}
+          handleNext={this.handleNextPress}
+          ref='CreateChannelForm'
+        />
+        <a href="/about">Go to employee</a>
+        {this.props.children}
+      </div>
     );
   }
 }
