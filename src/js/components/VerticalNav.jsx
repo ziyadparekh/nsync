@@ -91,7 +91,6 @@ const showStyles = {
     float: 'left'
   },
   showMetaProgress: {
-    width: '50%',
     height: '3px',
     borderRadius: '20px',
     position: 'absolute',
@@ -144,6 +143,61 @@ const logoImg = 'https://raw.githubusercontent.com/gulpjs/artwork/master/gulp-2x
 const moneyImg = 'http://www.marriagemattersjackson.com/Resources/Pictures/Bag%20of%20Money.png';
 const showImg = 'https://upload.wikimedia.org/wikipedia/en/d/d9/The_Apprentice_Logo.png';
 
+class ChannelCard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.imgSrc = props.imgSrc;
+    this.title = props.title;
+    this.duration = props.duration;
+    this.completed = props.completed;
+    this.queuedBy = props.queuedBy;
+    this.activeConnections = props.activeConnections;
+    this.theme = props.theme;
+  }
+  renderProgress(progress) {
+    const style = objectAssign({}, showStyles.showMetaProgress, {
+      width: progress + '%',
+      backgroundColor: this.theme
+    });
+    return (
+      <span className='meter' style={style}></span>
+    );
+  }
+  render() {
+    const imgSrc = this.imgSrc;
+    const title = this.title;
+    const progress = Math.round((this.completed/this.duration) * 100);
+    const queuedBy = this.queuedBy;
+    const connections = this.activeConnections;
+    const buttonStyle = objectAssign({}, nav.button, {
+      backgroundColor: this.theme
+    });
+    return (
+      <div className='show-info mini' style={showStyles.showInfo}>
+        <img src={imgSrc} style={showStyles.showImg} />
+        <div className='show-info-meta mini' style={showStyles.showMeta}>
+          <span className='show-title' style={showStyles.showTitle}>
+            {title}
+          </span>
+          {this.renderProgress(progress)}
+        </div>
+        <div className='show-sub-info mini' style={showStyles.showMeta}>
+          <span className='show-user' style={showStyles.showUser}>
+            queued by @{queuedBy}
+          </span>
+          <span className='show-connections' style={showStyles.showUser}>
+            {connections} connections
+          </span>
+        </div>
+        <div className='navigate-button mini' style={showStyles.showMeta}>
+          <a className='nav-button' style={buttonStyle}>Watch</a>
+        </div>
+      </div>
+    );
+  }
+}
+
 class NavItem extends Component {
   constructor(props) {
     super(props);
@@ -167,26 +221,14 @@ class NavItem extends Component {
   }
   renderShowInfo() {
     return (
-      <div className='show-info mini' style={showStyles.showInfo}>
-        <img src={showImg} style={showStyles.showImg} />
-        <div className='show-info-meta mini' style={showStyles.showMeta}>
-          <span className='show-title' style={showStyles.showTitle}>
-            The Apprentice
-          </span>
-          <span className='meter' style={showStyles.showMetaProgress}></span>
-        </div>
-        <div className='show-sub-info mini' style={showStyles.showMeta}>
-          <span className='show-user' style={showStyles.showUser}>
-            queued by @ziyadparekh
-          </span>
-          <span className='show-connections' style={showStyles.showUser}>
-            123 connections
-          </span>
-        </div>
-        <div className='navigate-button mini' style={showStyles.showMeta}>
-          <a className='nav-button' style={nav.button}>Watch</a>
-        </div>
-      </div>
+      <ChannelCard
+        imgSrc={showImg}
+        title='The Apprentice'
+        duration={216000}
+        completed={72000}
+        queuedBy='ziyadparekh'
+        activeConnections={123}
+        theme='#76ff03' />
     );
   }
   renderPopover() {
