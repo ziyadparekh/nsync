@@ -18,6 +18,7 @@
     "error-handler": "^1.0.0",
     "express": "^4.13.4",
     "object-assign": "^4.0.1",
+    "parse": "^1.8.1",
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.3",
     "react-dom": "^0.14.7",
