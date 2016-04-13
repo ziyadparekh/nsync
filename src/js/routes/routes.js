@@ -4,14 +4,16 @@ import { Route, IndexRoute } from 'react-router';
 import CreateChannelContainer from 'containers/CreateChannelContainer';
 import Autocomplete from 'components/Autocomplete';
 import AppContainer from 'containers/AppContainer';
-import CreateChannelConfig from 'configs/CreateChannelConfig';
+import AuthContainer from 'containers/AuthContainer'; 
 
 export default (
-  <Route path='/' component={AppContainer}>
-
+  <Route path='/' component={AppContainer}> 
+    <Route path='/login' component={AuthContainer} />
   </Route>  
 );
 
+// <Route path='/create-channel' component={CreateChannelContainer} />
+// <Route path='/create-channel' component={CreateChannelContainer} />
 // <Route path="/" config={CreateChannelConfig} component={CreateChannelContainer}>
 //   <IndexRoute component={Autocomplete} />
 //   <Route path="about" component={App} />

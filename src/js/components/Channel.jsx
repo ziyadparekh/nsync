@@ -65,6 +65,4 @@ class Channel extends Component {
   }
 }
 
-export default Channel
-
 export default Channel;
