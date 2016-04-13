@@ -1,8 +1,11 @@
 import objectAssign from 'object-assign';
-import copy from 'constants/copy';
+import * as copy from 'constants/copy';
 
 const initialState = {
-  user: false
+  user: false,
+  authStep: copy.STEP_SIGNUP,
+  buttonState: 'default',
+  errMsg: ''
 };
 
 export default function authed(state = initialState, action) {
@@ -11,6 +14,24 @@ export default function authed(state = initialState, action) {
     return objectAssign({}, state, {
       user: action.user
     });
+    case copy.IS_LOADING:
+    return objectAssign({}, state, {
+      buttonState: copy.IS_LOADING
+    });
+    case copy.IS_ERROR:
+    return objectAssign({}, state, {
+      buttonState: copy.IS_ERROR,
+      errMsg: action.isError
+    });
+    case copy.RESET_ERROR:
+    return objectAssign({}, state, {
+      buttonState: 'default',
+      errMsg: ''
+    });
+    case copy.TOGGLE_STEP:
+    return objectAssign({}, state, {
+      authStep: action.authStep
+    })
     default:
     return state
   }
