@@ -5,14 +5,17 @@ const initialState = {
   user: false,
   authStep: copy.STEP_SIGNUP,
   buttonState: 'default',
-  errMsg: ''
+  errMsg: '',
+  authState: copy.UNAUTHORIZED,
+  user: null
 };
 
 export default function authed(state = initialState, action) {
   switch (action.type) {
     case copy.RECEIVE_AUTHED_USER:
     return objectAssign({}, state, {
-      user: action.user
+      user: action.user,
+      authState: action.authState
     });
     case copy.IS_LOADING:
     return objectAssign({}, state, {
@@ -31,6 +34,11 @@ export default function authed(state = initialState, action) {
     case copy.TOGGLE_STEP:
     return objectAssign({}, state, {
       authStep: action.authStep
+    });
+    case copy.USER_NOT_FOUND:
+    return objectAssign({}, state, {
+      user: null,
+      authState: copy.UNAUTHORIZED
     })
     default:
     return state

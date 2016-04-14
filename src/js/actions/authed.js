@@ -49,11 +49,28 @@ export function toggleStep(step) {
   }
 }
 
+export function authorizeUser() {
+  return dispatch => {
+    let currentUser = Parse.User.current();
+    if (currentUser) {
+      return dispatch(authedUser(currentUser));
+    }
+    return dispatch(userNotFound());
+  }
+}
+
 function setReset() {
   return dispatch => {
     return setTimeout(() => {
       dispatch(resetError());
     }, 2000);
+  }
+}
+
+function userNotFound() {
+  return {
+    action: copy.USER_NOT_FOUND,
+    authState: copy.UNAUTHORIZED
   }
 }
 
@@ -89,6 +106,7 @@ function isError(err) {
 function authedUser(user) {
   return {
     type: copy.RECEIVE_AUTHED_USER,
+    authState: copy.AUTHORIZED,
     user
   };
 }

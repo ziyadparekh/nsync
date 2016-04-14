@@ -9,6 +9,7 @@ import AuthContainer from 'containers/AuthContainer';
 export default (
   <Route path='/' component={AppContainer}> 
     <Route path='/login' component={AuthContainer} />
+    <Route path='/create-channel' component={CreateChannelContainer} />
   </Route>  
 );
 
