@@ -3,6 +3,7 @@ import { OverlayTrigger, Popover } from 'react-bootstrap';
 import objectAssign from 'object-assign';
 import ChannelCard from 'components/ChannelCard';
 import NavItem from 'components/NavItem';
+import UserNavItem from 'components/UserNavItem';
 
 const styles = {
   verticalNav: {
@@ -84,13 +85,8 @@ class VerticalNav extends Component {
   }
   renderUserComponent(user) {
     return (
-      <NavItem
-        className='nav-menu-item'
-        style={styles.navItem}
-        imgSrc={moneyImg}
-        imgStyle={styles.itemImg}
-        hoverStyle={hover.navItem}
-      />
+      <UserNavItem
+        user={user} />
     );
   }
   render() {
